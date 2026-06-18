@@ -22,6 +22,7 @@ export function Finale() {
   return (
     <section
       ref={ref}
+      id="finale"
       className="relative flex min-h-[100svh] items-center justify-center overflow-hidden py-32"
     >
       {/* expanding light core */}

@@ -23,6 +23,15 @@ import { cn } from "@/lib/utils";
 export const EASE_CINEMATIC = [0.16, 1, 0.3, 1] as const;
 export const EASE_SOFT = [0.22, 1, 0.36, 1] as const;
 
+/**
+ * Clamp a scroll-progress input range into [0,1]. Framer Motion accelerates
+ * scroll-linked transforms onto a native ScrollTimeline, whose keyframe
+ * offsets must stay within [0,1] and be non-decreasing. Ranges that dip below
+ * 0 or past 1 throw "offsets must be monotonically non-decreasing".
+ */
+export const clampUnit = (arr: number[]) =>
+  arr.map((v) => Math.max(0, Math.min(1, v)));
+
 type Direction = "up" | "down" | "left" | "right" | "none";
 
 const offsetFor = (d: Direction, distance: number) => {

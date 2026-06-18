@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import { clampUnit } from "@/components/motion/primitives";
 
 const STAGES = [
   { src: "/visuals/orb.png", label: "A single seed", sub: "One ambient core" },
@@ -21,7 +22,7 @@ export function ScrollTransform() {
   const trackProgress = useTransform(scrollYProgress, [0.05, 0.95], [0, 1]);
 
   return (
-    <section ref={ref} className="relative h-[480vh]">
+    <section ref={ref} id="transform" className="relative h-[480vh]">
       <div className="sticky top-0 flex h-[100svh] flex-col items-center justify-center overflow-hidden">
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           {STAGES.map((s, i) => (
@@ -61,18 +62,22 @@ function Stage({
 
   const opacity = useTransform(
     progress,
-    [center - win, center - win / 2, center + win / 2, center + win],
+    clampUnit([center - win, center - win / 2, center + win / 2, center + win]),
     [0, 1, 1, 0]
   );
   const scale = useTransform(
     progress,
-    [center - win, center, center + win],
+    clampUnit([center - win, center, center + win]),
     [0.6, 1, 1.5]
   );
-  const rotate = useTransform(progress, [center - win, center + win], [-18, 18]);
+  const rotate = useTransform(
+    progress,
+    clampUnit([center - win, center + win]),
+    [-18, 18]
+  );
   const blur = useTransform(
     progress,
-    [center - win, center - win / 2, center + win / 2, center + win],
+    clampUnit([center - win, center - win / 2, center + win / 2, center + win]),
     [16, 0, 0, 16]
   );
   const filter = useTransform(blur, (b) => `blur(${b}px)`);

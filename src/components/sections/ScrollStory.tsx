@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import { clampUnit } from "@/components/motion/primitives";
 
 const CHAPTERS = [
   {
@@ -111,12 +112,12 @@ function Chapter({
   const start = index * seg;
   const opacity = useTransform(
     progress,
-    [start - 0.04, start + 0.06, start + seg - 0.06, start + seg],
+    clampUnit([start - 0.04, start + 0.06, start + seg - 0.06, start + seg]),
     [0, 1, 1, 0]
   );
   const y = useTransform(
     progress,
-    [start, start + seg],
+    clampUnit([start, start + seg]),
     [40, -40]
   );
 

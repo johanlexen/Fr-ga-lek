@@ -14,7 +14,7 @@ const SHOTS = [
 
 export function VisualsGallery() {
   return (
-    <section className="relative py-32 sm:py-44">
+    <section id="visuals" className="relative py-32 sm:py-44">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="mx-auto mb-16 max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-aurora-cyan">
